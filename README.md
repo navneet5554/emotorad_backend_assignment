@@ -31,8 +31,7 @@ $curl localhost:5000/all
 
 **###run below commands step by step for Task-2 :
 **
-
-# follow below steps to run MQTT and Redis server container
+##follow below steps to run MQTT and Redis server container
 
 $ git clone <repo-url>
 
