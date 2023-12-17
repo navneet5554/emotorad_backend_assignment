@@ -1,0 +1,53 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+
+  mongo1:
+    image: mongo:latest
+    container_name: mongo1
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpassword
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_REPLICA_SET_NAME=rs0
+    volumes:
+      - ./keyfile:/data/keyfile
+    command: mongod --replSet rs0 --bind_ip_all --keyFile /data/keyfile
+
+  mongo2:
+    image: mongo:latest
+    container_name: mongo2
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpassword
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_REPLICA_SET_NAME=rs0
+    volumes:
+      - ./keyfile:/data/keyfile
+    command: mongod --replSet rs0 --bind_ip_all --keyFile /data/keyfile
+
+  mongo3:
+    image: mongo:latest
+    container_name: mongo3
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpassword
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_REPLICA_SET_NAME=rs0
+    volumes:
+      - ./keyfile:/data/keyfile
+    command: mongod --replSet rs0 --bind_ip_all --keyFile /data/keyfile
+
