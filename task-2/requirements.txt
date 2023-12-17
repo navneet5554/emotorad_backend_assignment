@@ -3,5 +3,4 @@ flask==2.0.1
 redis
 paho-mqtt
 pyjwt
-Flask-PyMongo
 Werkzeug==2.2.2
