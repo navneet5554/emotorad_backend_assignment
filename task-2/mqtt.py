@@ -7,9 +7,9 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'nopasswordfornow'
-app.config['MQTT_BROKER'] = '127.0.0.1'  # Replace with your MQTT broker address
+app.config['MQTT_BROKER'] = 'emqx'  # Replace with your MQTT broker address
 
-redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis_client = redis.StrictRedis(host='redis', port=6379, db=0)
 
 def generate_token(email):
     expiration_time = datetime.utcnow() + timedelta(minutes=5)
@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
 
 def store_in_redis(data):
     # Connect to Redis
-    redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+    redis_client = redis.StrictRedis(host='redis', port=6379, db=0)
 
     # Store data in Redis
     redis_client.set('speed', data)    
